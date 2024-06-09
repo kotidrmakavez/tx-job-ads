@@ -1,0 +1,22 @@
+<div class="jobs-container">
+  <div class="header">
+    <div>
+      <button mat-button (click)="createNewJob()">Create new job</button>
+      <button mat-button (click)="goToInvoices()">Invoices</button>
+    </div>
+    <!-- TODO -->
+    <button mat-button>Filtering</button>
+  </div>
+
+  @if (jobsStoreService.jobs$ | async; as jobs) {
+    <div class="jobs-content">
+      @for (job of jobs; track job.id) {
+        <job-card
+          [job]="job"
+          (goToEvent)="editJob($event)"
+          (deleteJobEvent)="deleteJob($event)"
+        ></job-card>
+      }
+    </div>
+  }
+</div>

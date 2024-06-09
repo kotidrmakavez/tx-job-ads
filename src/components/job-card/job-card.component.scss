@@ -1,0 +1,19 @@
+.skill-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  .skills {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .status {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}

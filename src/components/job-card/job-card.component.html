@@ -1,0 +1,41 @@
+@if (job) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ job.title }} </mat-card-title>
+      <mat-card-subtitle>{{ job.description }} </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="skill-status">
+        <div class="skills">
+          @for (skill of job.skills; track skill) {
+            <mat-chip-set aria-label="Fish selection">
+              <mat-chip>{{ skill }} </mat-chip>
+            </mat-chip-set>
+          } @empty {
+            <span>No skills</span>
+          }
+        </div>
+
+        <div class="status">
+          @switch (job.status) {
+            @case ("draft") {
+              <button mat-flat-button color="primary">Draft</button>
+            }
+            @case ("published") {
+              <button mat-flat-button color="accent">Published</button>
+            }
+            @case ("archived") {
+              <button mat-flat-button color="warn">Archived</button>
+            }
+          }
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button (click)="goTo(job)">EDIT</button>
+      <button mat-button (click)="deleteJob(job)">DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+}
