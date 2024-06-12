@@ -1,5 +1,11 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatChipEditedEvent,
@@ -15,22 +21,19 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatFormFieldModule, MatChipsModule, MatButton, MatIconModule],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkillsComponent implements OnInit {
+export class SkillsComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   @Input() skills: string[] = [];
   @Output() skillsEvent = new EventEmitter<string[]>();
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.skills);
-  }
-
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add skill
     if (value) {
       this.skills.push(value);
       this.skillsEvent.emit(this.skills);
@@ -52,13 +55,13 @@ export class SkillsComponent implements OnInit {
   edit(skill: string, event: MatChipEditedEvent) {
     const value = event.value.trim();
 
-    // Remove fruit if it no longer has a name
+    // Remove skill if it no longer has a name
     if (!value) {
       this.remove(skill);
       return;
     }
 
-    // Edit existing fruit
+    // Edit existing skill
     const index = this.skills.indexOf(skill);
     if (index >= 0) {
       this.skills[index] = value;

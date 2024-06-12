@@ -4,17 +4,35 @@
       <button mat-button (click)="createNewJob()">Create new job</button>
       <button mat-button (click)="goToInvoices()">Invoices</button>
     </div>
-    <!-- TODO -->
-    <button mat-button>Filtering</button>
+
+    <div class="filters">
+      <input
+        #searchQuery
+        matInput
+        placeholder="Ex. Pizza"
+        value=""
+        (input)="searchByName(searchQuery.value)"
+      />
+
+      <button mat-button [matMenuTriggerFor]="menu">Status</button>
+      <mat-menu #menu="matMenu">
+        @for (status of jobStatuses; track status.key) {
+          <button mat-menu-item (click)="sortByStatus(status.key)">
+            {{ status.value }}
+          </button>
+        }
+      </mat-menu>
+    </div>
   </div>
 
-  @if (jobsStoreService.jobs$ | async; as jobs) {
+  @if (jobData$ | async; as jobs) {
     <div class="jobs-content">
       @for (job of jobs; track job.id) {
         <job-card
           [job]="job"
           (goToEvent)="editJob($event)"
           (deleteJobEvent)="deleteJob($event)"
+          (changeStatusEvent)="changeStatus($event)"
         ></job-card>
       }
     </div>

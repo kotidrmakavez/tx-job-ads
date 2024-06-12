@@ -9,7 +9,7 @@
       <div class="skill-status">
         <div class="skills">
           @for (skill of job.skills; track skill) {
-            <mat-chip-set aria-label="Fish selection">
+            <mat-chip-set>
               <mat-chip>{{ skill }} </mat-chip>
             </mat-chip-set>
           } @empty {
@@ -17,19 +17,20 @@
           }
         </div>
 
-        <div class="status">
-          @switch (job.status) {
-            @case ("draft") {
-              <button mat-flat-button color="primary">Draft</button>
-            }
-            @case ("published") {
-              <button mat-flat-button color="accent">Published</button>
-            }
-            @case ("archived") {
-              <button mat-flat-button color="warn">Archived</button>
-            }
+        <button mat-button [matMenuTriggerFor]="menu" class="job-status">
+          {{ job.status }}
+        </button>
+        <mat-menu #menu="matMenu">
+          @for (status of jobStatuses; track status.key) {
+            <button
+              mat-menu-item
+              [disabled]="status.disabled"
+              (click)="saveStatus(job.id, status.key)"
+            >
+              {{ status.value }}
+            </button>
           }
-        </div>
+        </mat-menu>
       </div>
     </mat-card-content>
 

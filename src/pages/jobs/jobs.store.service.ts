@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { JobAd, JobAdStatus } from '../../models';
 import { JobsService } from '../../services/jobs.service';
+import { DATE_NOW_UTC } from '../../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -56,7 +57,17 @@ export class JobsStoreService {
         ...job,
         status,
       };
+
       this.jobs = [...this.jobs];
+
+      const jobToEdit = {
+        ...this.jobs[index],
+        id: job.id,
+        updatedAt: DATE_NOW_UTC,
+      };
+      this._jobsService.updateJob(jobToEdit).subscribe((res) => {
+        console.log(res);
+      });
     }
   }
 }

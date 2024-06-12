@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JOBS_URL } from '../utils';
 
-import { JobAd, JobAdDto } from '../models';
+import { JobAd, JobAdDto, JobAdStatus } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({

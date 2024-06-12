@@ -11,9 +11,7 @@
     gap: 1rem;
   }
 
-  .status {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+  .job-status {
+    text-transform: capitalize;
   }
 }

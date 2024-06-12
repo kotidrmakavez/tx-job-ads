@@ -1,1 +1,8 @@
-<p>invoices works!</p>
+<div class="invoices-header">
+  <h3>Invoices</h3>
+  <button mat-button (click)="goToJobs()">Jobs</button>
+</div>
+
+@if (invoiceStoreService.invoices$ | async; as invoices) {
+  <tx-table [invoices]="invoices"></tx-table>
+}

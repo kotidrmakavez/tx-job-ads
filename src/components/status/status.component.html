@@ -1,0 +1,16 @@
+@if (selectedJobStatus) {
+  <button mat-button [matMenuTriggerFor]="menu">
+    {{ selectedJobStatus.value }}
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (status of jobStatuses; track status.key) {
+      <button
+        mat-menu-item
+        [disabled]="status.disabled"
+        (click)="saveStatus(status)"
+      >
+        {{ status.value }}
+      </button>
+    }
+  </mat-menu>
+}

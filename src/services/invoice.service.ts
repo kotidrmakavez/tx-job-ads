@@ -14,4 +14,12 @@ export class InvoiceService {
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(INVOICES_URL);
   }
+
+  createInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.http.post<Invoice>(INVOICES_URL, invoice);
+  }
+
+  deleteInvoice(id: number) {
+    return this.http.delete(INVOICES_URL + id);
+  }
 }

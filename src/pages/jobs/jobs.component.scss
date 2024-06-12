@@ -7,9 +7,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+
+    .filters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .input {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
   .jobs-content {
+    padding: 1rem;
     width: 100%;
     box-sizing: border-box;
     display: flex;
